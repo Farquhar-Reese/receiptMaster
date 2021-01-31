@@ -1,13 +1,65 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
+import * as Updates from "expo-updates";
 import { StyleSheet, Text, View } from 'react-native';
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { NavigationContainer } from "@react-navigation/native";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import HomeScreen from "./Screens/HomeScreen/index";
+import SearchScreen from "./Screens/ItemsScreen/index";
+import SettingsScreen from "./Screens/SettingsScreen/index";
+import Colors from "./Constants/Colors"
+
+const Tab = createBottomTabNavigator();
+
+function MyTabs() {
+  return (
+    <Tab.Navigator>
+      <Tab.Screen
+        name="Home"
+        component={HomeScreen}
+        options={{
+          tabBarLabel: ({ focused, color, size }) => (
+            <Text style={{color:focused?Colors.tintColor:"#A9A9A9", fontSize: 11}}> Home </Text>
+          ),
+          tabBarIcon: ({ focused, color, size }) => (
+            <MaterialCommunityIcons name="camera" color={focused ? Colors.tintColor : "#A9A9A9"} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Search"
+        component={SearchScreen}
+        options={{
+          tabBarLabel: ({ focused, color, size }) => (
+            <Text style={{color:focused?Colors.tintColor:"#A9A9A9", fontSize: 11}}> Search </Text>
+          ),
+          tabBarIcon: ({focused, color, size }) => (
+            <MaterialCommunityIcons name="magnify" color={focused ? Colors.tintColor : "#A9A9A9"} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Settings"
+        component={SettingsScreen}
+        options={{
+          tabBarLabel: ({ focused, color, size }) => (
+            <Text style={{color:focused?Colors.tintColor:"#A9A9A9", fontSize: 11}}> Settings </Text>
+          ),
+          tabBarIcon: ({focused, color, size }) => (
+            <MaterialCommunityIcons name="cog" color={focused ? Colors.tintColor : "#A9A9A9"} size={size} />
+          ),
+        }}
+      />
+    </Tab.Navigator>
+  );
+}
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+        <MyTabs />
+      </NavigationContainer>
   );
 }
 

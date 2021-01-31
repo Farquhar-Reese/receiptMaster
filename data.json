@@ -1,0 +1,9 @@
+[{"_ID":1,
+    "clubName":"Brae Burn Country Club",
+    "notifications":true,},
+{"_ID":2,
+    "clubName":"Woodland Country Club",
+    "notifications":false,},
+{"_ID":3,
+    "clubName":"The Country Club",
+    "notifications":true,}]
