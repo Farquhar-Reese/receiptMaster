@@ -5,9 +5,19 @@ import {
   createBottomTabNavigator
 } from "react-navigation";
 import HomeScreen from "../Screens/HomeScreen/index"
+import SearchScreen from "../Screens/HomeScreen/index"
+import ItemScreen from "../Screens/HomeScreen/index"
+import SettingsScreen from "../Screens/HomeScreen/index"
+import PictureDetailsScreen from "../Screens/SettingsScreen/index"
 
+
+/* 
+IMPORTANT!!!!!!!!!!!!! CURRENTLY THIS NAVIGATION LAYOUT IS OUT DATED. THEREFORE THIS WHOLE FILE IS NOT BEING USED. 
+To see the current in use navigator checkout App.js.
+*/
 const HomeStack = createStackNavigator({
-    Home: HomeScreen
+    Home: HomeScreen,
+    PictureDetails: PictureDetailsScreen,
     },
     {headerMode: "none"});
   

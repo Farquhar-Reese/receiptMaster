@@ -17,20 +17,34 @@ class HomeScreen extends React.Component {
     this.state = {
       picTaken: false
     };
-    this.onPicture = this.onPicture.bind(this)
+    this.onPicture = this.onPicture.bind(this);
+    this.navigateToSubPage = this.navigateToSubPage.bind(this)
   }
+
+  navigateToSubPage(nav, pic) {
+    console.log("inside the nav section. Pic is:")
+    console.log(pic.uri)
+      nav.navigate("Picture", {
+        pic: pic.uri,
+      });
+  }
+
 
   onPicture(pic) {
     console.log(pic)
     this.setState({
       picTaken: true
     });
+    console.log("made it to the nav section")
+    console.log(this.props.navigation)
+    this.navigateToSubPage(this.props.navigation, pic)
   };
 
   useCameraRollPhoto() {
     console.log("made it to the cameraroll function")
   }
 
+  
   render() {
     return (
       <Container style={styles.homeBackground}>

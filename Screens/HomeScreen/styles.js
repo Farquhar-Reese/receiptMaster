@@ -45,5 +45,10 @@ export default {
         borderRadius: 50,
         justifyContent: "center",
         alignItems: "center",
+    },
+    imageDimensions: {
+        width: "50",
+        height: "50",
+        borderRadius: (deviceWidth * 0.1) / 2,
     }
 }
