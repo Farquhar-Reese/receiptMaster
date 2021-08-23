@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { Text, View, TouchableOpacity, Dimensions } from "react-native";
-import * as Permissions from "expo-permissions";
+//import * as Permissions from "expo-permissions"; --> this is depreciated
 import { Camera } from "expo-camera";
+import * as ImagePicker from 'expo-image-picker';
 import Icon from "react-native-vector-icons/FontAwesome";
 
 class CameraComp extends React.Component {
@@ -15,14 +16,16 @@ class CameraComp extends React.Component {
 
       componentDidMount = async () => {
         console.log("componentDidMount cameraComponent");
-        const { status } = await Permissions.askAsync(Permissions.CAMERA);
+        const { status } = await Camera.requestPermissionsAsync();
         this.setState({ hasCameraPermission: status === "granted" });
       };
 
       snapPicture = async () => {
-        let photo = await this.camera.takePictureAsync();
+        const photoRAW = await this.camera.takePictureAsync();
+        //const asset = await MediaLibrary.createAssetAsync(uri)
+
         // console.log("photo:", photo);
-        this.props.onPicture(photo);
+        this.props.onPicture(photoRAW);
       };
 
       renderTopBar = () => (

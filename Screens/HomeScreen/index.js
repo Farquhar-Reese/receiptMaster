@@ -1,11 +1,12 @@
-import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
 import { Container, Content } from "native-base";
 import HeaderComp from "../../Components/HeaderComp";
 import CamComp from "./cameraComponent"
 import styles from './styles';
 import Icon from "react-native-vector-icons/FontAwesome";
 import { Colors } from 'react-native/Libraries/NewAppScreen';
+import * as ImagePicker from 'expo-image-picker';
 
 class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -23,9 +24,11 @@ class HomeScreen extends React.Component {
 
   navigateToSubPage(nav, pic) {
     console.log("inside the nav section. Pic is:")
-    console.log(pic.uri)
+    console.log(pic)
+    console.log("ExampleField: ")
+    console.log(pic.width)
       nav.navigate("Picture", {
-        pic: pic.uri,
+        camPic: pic,
       });
   }
 
@@ -44,6 +47,8 @@ class HomeScreen extends React.Component {
     console.log("made it to the cameraroll function")
   }
 
+
+  
   
   render() {
     return (
