@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
+import { MaterialIcons } from '@expo/vector-icons';
 import { Container, Content } from "native-base";
-import HeaderComp from "../../Components/HeaderComp";
+/*import HeaderComp from "../../Components/HeaderComp"; this is my custom built header component
+This is how you call it:
+<HeaderComp titleTxt={"New Receipt"} />
+*/
 import CamComp from "./cameraComponent"
 import styles from './styles';
 import Icon from "react-native-vector-icons/FontAwesome";
@@ -53,22 +57,21 @@ class HomeScreen extends React.Component {
   render() {
     return (
       <Container style={styles.homeBackground}>
-        <HeaderComp titleTxt={"New Receipt"} />
+        
         <Content>
           <View style={styles.cameraBox}>
             <CamComp onPicture={this.onPicture}/> 
           </View>
           <TouchableOpacity onPress={() => this.useCameraRollPhoto()} style={styles.photoAlbumButton}>
             <Text style={styles.photoAlbumButtonText}>Use Photo from Camera Roll</Text>
-            <Icon
-                style={{
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-                name="arrow-right"
-                size={30}
-                color="white"
-              />
+            
+
+<MaterialIcons
+            name={Platform.OS === "ios" ? "arrow-forward-ios" : "arrow-forward"}
+            size={30}
+            style={{ marginBottom: 0 }}
+            color={"#fff"}
+          />
           </TouchableOpacity>
         </Content>
       </Container>

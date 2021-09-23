@@ -62,8 +62,36 @@ function HomeScreenSubPageNavigation() {
   return (
       <Stack.Navigator>
         
-        <Stack.Screen name="Index" component={HomeScreen} />
-        <Stack.Screen name="Picture" component={PictureScreen} /> 
+        <Stack.Screen name="Index" 
+        component={HomeScreen} 
+        options={{
+          title: 'New Receipt',
+          headerStyle: {
+            backgroundColor: Colors.tintColor,
+            elevation: 0,
+            shadowOpacity: 0,
+            borderBottomWidth: 0,
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontSize: 23
+          },
+        }} />
+        <Stack.Screen name="Picture" component={PictureScreen}
+        options={{
+          title: 'Picture',
+          headerStyle: {
+            backgroundColor: Colors.tintColor,
+            elevation: 0,
+            shadowOpacity: 0,
+            borderBottomWidth: 0,
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontSize: 23
+          },
+        }}
+        /> 
       </Stack.Navigator>
   )
 }
