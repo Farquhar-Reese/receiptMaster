@@ -8,7 +8,6 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import HomeScreen from "./Screens/HomeScreen/index";
 import SearchScreen from "./Screens/ItemsScreen/index";
 import SettingsScreen from "./Screens/SettingsScreen/index";
-import PictureScreen from "./Screens/HomeScreen/pictureProcessing"; /*Actually create a sub page for the home page and include its link here!!!*/
 import Colors from "./Constants/Colors"
 import { createStackNavigator } from '@react-navigation/stack';
 
@@ -32,7 +31,7 @@ function MyTabs() {
       />
       <Tab.Screen
         name="Search"
-        component={SearchScreen}
+        component={SearchScreenSubPageNavigation}
         options={{
           tabBarLabel: ({ focused, color, size }) => (
             <Text style={{color:focused?Colors.tintColor:"#A9A9A9", fontSize: 11}}> Search </Text>
@@ -44,7 +43,7 @@ function MyTabs() {
       />
       <Tab.Screen
         name="Settings"
-        component={SettingsScreen}
+        component={SettingsScreenSubPageNavigation}
         options={{
           tabBarLabel: ({ focused, color, size }) => (
             <Text style={{color:focused?Colors.tintColor:"#A9A9A9", fontSize: 11}}> Settings </Text>
@@ -77,23 +76,54 @@ function HomeScreenSubPageNavigation() {
             fontSize: 23
           },
         }} />
-        <Stack.Screen name="Picture" component={PictureScreen}
-        options={{
-          title: 'Picture',
-          headerStyle: {
-            backgroundColor: Colors.tintColor,
-            elevation: 0,
-            shadowOpacity: 0,
-            borderBottomWidth: 0,
-          },
-          headerTintColor: '#fff',
-          headerTitleStyle: {
-            fontSize: 23
-          },
-        }}
-        /> 
       </Stack.Navigator>
   )
+}
+
+function SearchScreenSubPageNavigation() {
+  return (
+    <Stack.Navigator>
+      
+      <Stack.Screen name="Index" 
+      component={SearchScreen} 
+      options={{
+        title: 'About',
+        headerStyle: {
+          backgroundColor: Colors.tintColor,
+          elevation: 0,
+          shadowOpacity: 0,
+          borderBottomWidth: 0,
+        },
+        headerTintColor: '#fff',
+        headerTitleStyle: {
+          fontSize: 23
+        },
+      }} />
+    </Stack.Navigator>
+)
+}
+
+function SettingsScreenSubPageNavigation() {
+  return (
+    <Stack.Navigator>
+      
+      <Stack.Screen name="Index" 
+      component={SettingsScreen} 
+      options={{
+        title: 'Settings',
+        headerStyle: {
+          backgroundColor: Colors.tintColor,
+          elevation: 0,
+          shadowOpacity: 0,
+          borderBottomWidth: 0,
+        },
+        headerTintColor: '#fff',
+        headerTitleStyle: {
+          fontSize: 23
+        },
+      }} />
+    </Stack.Navigator>
+)
 }
 
 export default function App() {

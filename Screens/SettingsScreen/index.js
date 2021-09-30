@@ -1,7 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, Dimensions, TouchableOpacity, Switch } from 'react-native';
 import { Container, Content } from "native-base";
-import HeaderComp from "../../Components/HeaderComp";
 import dataJson from "../../data.json"
 import { Ionicons } from "@expo/vector-icons";
 import * as WebBrowser from "expo-web-browser";
@@ -21,6 +20,8 @@ export default class SettingsScreen extends React.Component {
     //need to define all elements in the array inside of the constructor state
     super(props);
     this.state = {
+      passwordSecure: true,
+      changeEmail: true,
       //figure out how to do this
       switchValues: {},
       switch1ValuePushNotifications: true,
@@ -53,14 +54,18 @@ export default class SettingsScreen extends React.Component {
     const navigation = this.props.navigation;
     return (
       <Container style={{ backgroundColor: "#FFF" }}>
-        <HeaderComp titleTxt={"Settings"} />
         <Content>
           <View>
             <Text style={styles.HeaderTxt}>General</Text>
             <View style={styles.line}></View>
             <TouchableOpacity
-              style={styles.listTxtContainer}
+            style={[styles.listTxtContainer, this.state.passwordSecure ? styles.whiteBack : styles.redBack]}
+             
               onPress={() =>
+                this.setState({
+                  passwordSecure: !this.state.passwordSecure
+                })
+                /*
                 this.props.navigation.navigate("ChangeUserData", {
                   purpose: "Password",
                   placeholderTxtArr: [
@@ -71,6 +76,7 @@ export default class SettingsScreen extends React.Component {
                   multilines: false,
                   submitTxt: "Save"
                 })
+                */
               }
             >
               <Text style={styles.listTxt}>Password</Text>
@@ -85,17 +91,21 @@ export default class SettingsScreen extends React.Component {
               />
             </TouchableOpacity>
             <TouchableOpacity
-              style={styles.listTxtContainer}
+            style={[styles.listTxtContainer, this.state.changeEmail ? styles.whiteBack : styles.redBack]}
               onPress={() =>
+                this.setState({
+                  changeEmail: !this.state.changeEmail
+                })
+                /*
                 this.props.navigation.navigate("ChangeUserData", {
                   purpose: "Email",
                   placeholderTxtArr: ["New email"],
                   multilines: false,
                   submitTxt: "Confirm new email"
-                })
+                })*/
               }
             >
-              <Text style={styles.listTxt}>Email</Text>
+              <Text  style={styles.listTxt}>Email</Text>
               <Ionicons
                 name={
                   Platform.OS === "ios"
@@ -125,7 +135,7 @@ export default class SettingsScreen extends React.Component {
               style={styles.listTxtContainer}
               onPress={() => {
                 WebBrowser.openBrowserAsync(
-                  "http://branda.app/privacyPolicy.html"
+                  "https://www.cia.gov/"
                 );
               }}
             >
@@ -144,7 +154,7 @@ export default class SettingsScreen extends React.Component {
               style={styles.listTxtContainer}
               onPress={() => {
                 WebBrowser.openBrowserAsync(
-                  "http://branda.app/TermsOfService.html"
+                  "https://www.cs.brandeis.edu/~tim/"
                 );
               }}
             >
@@ -160,6 +170,10 @@ export default class SettingsScreen extends React.Component {
               />
             </TouchableOpacity>
           </View>
+         
+          <Text style={this.state.passwordSecure ? styles.noTxt : styles.hackerTxt} >STOP TRYING TO HACK MY APP!</Text>
+          <Text style={this.state.changeEmail ? styles.noTxt : styles.hackerTxt} >This is a challenge for a later assignnment :D!</Text>
+          
         </Content>
       </Container>
     );

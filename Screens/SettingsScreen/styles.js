@@ -182,5 +182,18 @@ export default {
         backgroundColor: "black",
         marginTop: 3,
         marginBottom: 6
+      },
+      whiteBack: {
+        backgroundColor: "white"
+      },
+      redBack: {
+        backgroundColor: "red"
+      },
+      noTxt: {
+        display: "none"
+      },
+      hackerTxt: {
+        color: "red",
+        fontSize: 50
       }
 };

@@ -86,6 +86,19 @@ export default {
         width: "100%",
         height: "100%",
         borderRadius: (deviceWidth * 0.1) / 2,
+    },
+    purpose: {
+        flex: 1,
+        backgroundColor: Colors.tintColorAlt,
+        alignItems: "center",
+        justifyContent: "space-around",
+        flexDirection: "column",
+        padding: 20
+    },
+    purposeTxt: {
+        textAlign: "center",
+        color: "white",
+        fontSize: 18
     }
 
 };

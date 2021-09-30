@@ -31,7 +31,7 @@ class HomeScreen extends React.Component {
     console.log(pic)
     console.log("ExampleField: ")
     console.log(pic.width)
-      nav.navigate("Picture", {
+      nav.navigate("Search", {
         camPic: pic,
       });
   }
@@ -49,6 +49,7 @@ class HomeScreen extends React.Component {
 
   useCameraRollPhoto() {
     console.log("made it to the cameraroll function")
+    this.props.navigation.navigate("Settings");
   }
 
 
@@ -63,7 +64,7 @@ class HomeScreen extends React.Component {
             <CamComp onPicture={this.onPicture}/> 
           </View>
           <TouchableOpacity onPress={() => this.useCameraRollPhoto()} style={styles.photoAlbumButton}>
-            <Text style={styles.photoAlbumButtonText}>Use Photo from Camera Roll</Text>
+            <Text style={styles.photoAlbumButtonText}>Go to Settings Screen</Text>
             
 
 <MaterialIcons
