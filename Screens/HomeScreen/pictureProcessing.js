@@ -13,13 +13,17 @@ class PictureDetailsScreen extends React.Component {
   constructor(props) {
     super(props);
     console.log("final image notes reeeeee:");
-    console.log(this.props.pic);
-    console.log(this.props.route.params.pic);
+    console.log(this.props.route.params.camPic);
     //const { camPic } = route.params;
   }
 
   addBut = () =>{
     console.log("made it to the addBut")
+    this.props.navigation.navigate("ReceiptDetails", {
+      pic: this.props.route.params.camPic,
+    });
+    this.props.navigation.navigate("ReceiptDetails");
+    console.log("finished add button function")
 
     /**
      * 

@@ -53,7 +53,6 @@ export default class SettingsScreen extends React.Component {
     const navigation = this.props.navigation;
     return (
       <Container style={{ backgroundColor: "#FFF" }}>
-        <HeaderComp titleTxt={"Settings"} />
         <Content>
           <View>
             <Text style={styles.HeaderTxt}>General</Text>

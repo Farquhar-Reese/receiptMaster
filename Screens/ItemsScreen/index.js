@@ -2,7 +2,6 @@ import React from 'react';
 import {useState} from "react";
 import { StyleSheet, Text, View, FlatList, TextInput } from 'react-native';
 import { Container, Content } from "native-base";
-import HeaderComp from "../../Components/HeaderComp";
 import ListComp from "./listComponet";
 import styles from "./styles";
 
@@ -68,7 +67,6 @@ class ItemScreen extends React.Component {
   render() {
     return (
       <Container style={{ backgroundColor: "#FFF" }}>
-        <HeaderComp titleTxt={"Purchases"} />
         <View style={styles.searchBarContainer}>
           <TextInput 
             value={this.state.searchText}

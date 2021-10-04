@@ -9,6 +9,7 @@ import HomeScreen from "./Screens/HomeScreen/index";
 import SearchScreen from "./Screens/ItemsScreen/index";
 import SettingsScreen from "./Screens/SettingsScreen/index";
 import PictureScreen from "./Screens/HomeScreen/pictureProcessing"; /*Actually create a sub page for the home page and include its link here!!!*/
+import ReceiptDetailsScreen from "./Screens/HomeScreen/receiptDetails"
 import Colors from "./Constants/Colors"
 import { createStackNavigator } from '@react-navigation/stack';
 
@@ -32,7 +33,7 @@ function MyTabs() {
       />
       <Tab.Screen
         name="Search"
-        component={SearchScreen}
+        component={SearchScreenSubPageNavigation}
         options={{
           tabBarLabel: ({ focused, color, size }) => (
             <Text style={{color:focused?Colors.tintColor:"#A9A9A9", fontSize: 11}}> Search </Text>
@@ -44,7 +45,7 @@ function MyTabs() {
       />
       <Tab.Screen
         name="Settings"
-        component={SettingsScreen}
+        component={SettingsScreenSubPageNavigation}
         options={{
           tabBarLabel: ({ focused, color, size }) => (
             <Text style={{color:focused?Colors.tintColor:"#A9A9A9", fontSize: 11}}> Settings </Text>
@@ -92,6 +93,69 @@ function HomeScreenSubPageNavigation() {
           },
         }}
         /> 
+        <Stack.Screen name="ReceiptDetails" component={ReceiptDetailsScreen}
+        options={{
+          title: 'Receipt Details',
+          headerStyle: {
+            backgroundColor: Colors.tintColor,
+            elevation: 0,
+            shadowOpacity: 0,
+            borderBottomWidth: 0,
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontSize: 23
+          },
+        }}
+        /> 
+      </Stack.Navigator>
+
+
+  )
+}
+
+function SearchScreenSubPageNavigation() {
+  return (
+      <Stack.Navigator>
+        
+        <Stack.Screen name="Index" 
+        component={SearchScreen} 
+        options={{
+          title: 'Purchases',
+          headerStyle: {
+            backgroundColor: Colors.tintColor,
+            elevation: 0,
+            shadowOpacity: 0,
+            borderBottomWidth: 0,
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontSize: 23
+          },
+        }} />
+      </Stack.Navigator>
+  )
+}
+
+function SettingsScreenSubPageNavigation() {
+  return (
+      <Stack.Navigator>
+        
+        <Stack.Screen name="Index" 
+        component={SettingsScreen} 
+        options={{
+          title: 'Settings',
+          headerStyle: {
+            backgroundColor: Colors.tintColor,
+            elevation: 0,
+            shadowOpacity: 0,
+            borderBottomWidth: 0,
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontSize: 23
+          },
+        }} />
       </Stack.Navigator>
   )
 }
