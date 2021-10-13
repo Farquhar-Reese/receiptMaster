@@ -11,6 +11,7 @@ import styles from './styles';
 import Icon from "react-native-vector-icons/FontAwesome";
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import * as ImagePicker from 'expo-image-picker';
+import itemsScreen from '../ItemsScreen/index'
 
 class receiptDetailsScreen extends React.Component {
     static navigationOptions = {
@@ -52,15 +53,30 @@ class receiptDetailsScreen extends React.Component {
             detailedNote: changedTxt
           });
     }
-  
-   /** 
-    * 
-    * 
-    * 
-    * styles.leftContainerInner
-    */
 
-   
+    finishFun = () => {
+      const newItem = {
+        id: "ba69ganggngplop",
+        title: this.state.titleTxt,
+        image: this.props.route.params.pic.uri,
+        datePurchased: "7/15/2023"
+      }
+      /**
+       * 1) learn how to pass new object to the search screen properly
+       * 2) find a secure way to store large amounts of Data locally
+       * 3) investigate cloud option if local storage is not secure enough 
+       * 4) learn how to multithread various pictures into one receipt order/package/folder
+       * 5) make purchase/searach screen a sectioned list for better organization
+       * 
+       * 
+       */
+      this.props.navigation.navigate('Search', { 
+        screen: 'Index', 
+        params: {
+          newItem: newItem
+        }
+      });
+    }
    
     render() {
         const DATA = [
@@ -97,6 +113,8 @@ class receiptDetailsScreen extends React.Component {
                     </View>
                 </View>
           );
+
+          
       
     
       return (
@@ -130,7 +148,7 @@ class receiptDetailsScreen extends React.Component {
                         >
                         </TextInput>
                 <View style={styles.butContainer}>
-                    <TouchableOpacity style={styles.butStyle}>
+                    <TouchableOpacity style={styles.butStyle} onPress={this.finishFun}>
                         <Text style={styles.butTxt}>Finish</Text>
                     </TouchableOpacity>
                 </View>

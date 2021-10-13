@@ -1,7 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, Dimensions, TouchableOpacity, Switch } from 'react-native';
 import { Container, Content } from "native-base";
-import HeaderComp from "../../Components/HeaderComp";
 import dataJson from "../../data.json"
 import { Ionicons } from "@expo/vector-icons";
 import * as WebBrowser from "expo-web-browser";

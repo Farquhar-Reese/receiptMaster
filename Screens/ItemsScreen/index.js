@@ -39,13 +39,20 @@ class ItemScreen extends React.Component {
     this.state = { 
       dataJson: []
     };
+    this.add2ListItems = this.add2ListItems.bind(this)
   }
 
   componentDidMount() {
-    this.setState({
-      dataJson: ListItems,
-      searchText: ''
-    });
+      this.setState({
+        dataJson: ListItems,
+        searchText: ''
+      });
+  }
+
+  add2ListItems(newListItem){
+    this.setState( {
+      dataJson: [...dataJson, newListItem]
+    })
   }
 
   setSearchText(event) {
