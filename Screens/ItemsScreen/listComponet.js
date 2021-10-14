@@ -47,15 +47,13 @@ class ListComp extends React.Component {
     
   
     render() {
-      const navigation = this.props.navigation;
       return (
-        <TouchableOpacity
+        <View
         style={
           this.props.index % 2 == 0
             ? styles.compBackground
             : styles.altCompBackground
         }
-        onPress={() => this.navigateToAcceptPg(navigation)}
       >
           <View style={styles.leftContainer}>
             <View style={styles.leftContainerInner}>
@@ -72,7 +70,7 @@ class ListComp extends React.Component {
               <Text>{this.props.itemPurchaseDate}</Text>
             </View>
           </View>
-      </TouchableOpacity>
+        </View>
         
       );
       }

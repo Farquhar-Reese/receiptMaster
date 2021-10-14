@@ -22,7 +22,7 @@ class PictureDetailsScreen extends React.Component {
     this.props.navigation.navigate("ReceiptDetails", {
       pic: this.props.route.params.camPic,
     });
-    this.props.navigation.navigate("ReceiptDetails");
+    //this.props.navigation.navigate("ReceiptDetails");
     console.log("finished add button function")
 
     /**

@@ -90,7 +90,7 @@ export default {
     },
     detailPgInputLarge: {
         textAlignVertical: 'top',
-        height: 300,
+        height: 100,
         flexWrap: "wrap",
         margin: 12,
         borderWidth: 2,

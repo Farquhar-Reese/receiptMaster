@@ -13,23 +13,46 @@ import { Colors } from 'react-native/Libraries/NewAppScreen';
 import * as ImagePicker from 'expo-image-picker';
 import itemsScreen from '../ItemsScreen/index'
 
-class receiptDetailsScreen extends React.Component {
-    static navigationOptions = {
-      header: null
-    };
-  
-    constructor(props) {
-      super(props);
-      this.state = { 
-        receiptJson: [],
-        titleTxt: "",
-        detailedNote: ""
-      };
-      
-      console.log("details screen for receipt...");
-      //const { camPic } = route.params;
+import { useNavigation } from '@react-navigation/native';
+import { useRoute } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+const receiptDetailsScreen = (pic) => {
+    const navigation = useNavigation();
+    const route = useRoute();
+    const [receiptJson, changeReceiptJson] = useState([{
+      id: route.params.pic.uri,
+      imageData: route.params.pic,
+      imageURI:  route.params.pic.uri}]);
+    const [titleTxt, changeTitleTxt] = useState("");
+    const [detailedNote, changeDetailedNote] = useState("");
+
+
+    useEffect(() => {getData()}
+           ,[])
+
+    const getData = async () => {
+      console.log("my  recepitJson = ")
+      console.log(receiptJson)
+      console.log("we made it inside of getData")
+      console.log("routeParams = ")
+      console.log(route.params)
+      console.log("normal Params = ")
+      console.log(pic)
+        try {
+          const jsonValue = await AsyncStorage.getItem('@TempReceipts')
+          let data = null
+          if (jsonValue!=null) {
+            console.log("we made it through useEffect and the dataInAsync is not empty for @TempReceipts")
+            data = JSON.parse(jsonValue)
+            changeReceiptJson(receiptJson.push(data))
+          } 
+        } catch(e) {
+          console.dir(e)
+        }
     }
 
+    /*
     componentDidMount() {
         this.setState({
             receiptJson: [...this.state.receiptJson, {
@@ -38,27 +61,78 @@ class receiptDetailsScreen extends React.Component {
             imageURI:  this.props.route.params.pic.uri}],
           });
     }
+
+    */
   
-    addBut = () =>{
+    const addBut = () =>{
       console.log("made it to the addBut")
     }
 
-    changeTxt4Title = (changedTxt) => {
-        this.setState({
-            titleTxt: changedTxt
-          });
+    const changeTxt4Title = (changedTxt) => {
+      changeTitleTxt(changedTxt)
     }
-    changeTxt4DetailedNote  = (changedTxt) => {
-        this.setState({
-            detailedNote: changedTxt
-          });
+    
+    const changeTxt4DetailedNote  = (changedTxt) => {
+      changeDetailedNote(changedTxt)
     }
 
-    finishFun = () => {
+    const storeData = async (value) => {
+      try {
+        if (value != null) {
+          const jsonValue = JSON.stringify(value)
+          const jsonValueOringal = await AsyncStorage.getItem('@Receipts')
+          if (jsonValueOringal != null) {
+            let data = null
+            data = JSON.parse(jsonValueOringal)
+            data.push(value)
+            const newData = JSON.stringify(data)
+            await AsyncStorage.setItem('@Receipts', newData)
+          } else {
+            await AsyncStorage.setItem('@Receipts', jsonValue)
+          }
+          
+        }
+      } catch (e) {
+        console.dir(e)
+      }
+}
+
+
+const storeListItem = async (value) => {
+ 
+  try {
+    if (value != null) {
+      const jsonValue = JSON.stringify(value)
+      const jsonWholeReceiptPicturePackage = await AsyncStorage.getItem('@Receipts')
+      if (jsonWholeReceiptPicturePackage != null) {
+        console.log("we made it inside of the receipt update stream")
+        console.log(jsonWholeReceiptPicturePackage)
+        console.log("we did something inside of storeListItem")
+        let data = null
+        data = JSON.parse(jsonWholeReceiptPicturePackage)
+        data.push(value)
+        console.log(data)
+        console.log("finished printing the data")
+        const newData = JSON.stringify(data)
+        await AsyncStorage.setItem('@Receipts', newData).then(navigation.navigate('Search'))
+      } else {
+        let newReceiptList = []
+        newReceiptList.push(value)
+        await AsyncStorage.setItem('@Receipts', JSON.stringify(newReceiptList)).then(navigation.navigate('Search'))
+      }
+      
+    }
+  } catch (e) {
+    console.dir(e)
+  }
+}
+
+    const finishFun = () => {
       const newItem = {
-        id: "ba69ganggngplop",
-        title: this.state.titleTxt,
-        image: this.props.route.params.pic.uri,
+        id: route.params.pic.uri,
+        title: titleTxt,
+        description: detailedNote,
+        image: route.params.pic.uri,
         datePurchased: "7/15/2023"
       }
       /**
@@ -69,40 +143,37 @@ class receiptDetailsScreen extends React.Component {
        * 5) make purchase/searach screen a sectioned list for better organization
        * 
        * 
+       *  storeData(receiptJson) --> use this to store multiple images with add button for flat list
+       * 
        */
-      this.props.navigation.navigate('Search', { 
-        screen: 'Index', 
-        params: {
-          newItem: newItem
-        }
-      });
+       storeListItem(newItem) 
     }
    
-    render() {
         const DATA = [
             {
               id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
               title: 'First Item',
-              imageURI:  this.props.route.params.pic.uri
+              imageURI:  route.params.pic.uri
             },
             {
               id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
               title: 'Second Item',
-              imageURI:  this.props.route.params.pic.uri
+              imageURI:  route.params.pic.uri
             },
             {
               id: '58694a0f-3da1-471f-bd96-145571e29d72',
               title: 'Third Item',
-              imageURI:  this.props.route.params.pic.uri
+              imageURI:  route.params.pic.uri
             },
             {
                 id: '48dogeCoin',
                 title: 'Third Item',
-                imageURI:  this.props.route.params.pic.uri
+                imageURI:  route.params.pic.uri
               },
           ];
 
           const renderItem = ({ item }) => (
+
               
               <View style={styles.leftContainer}>
                     <View style={styles.leftContainerInner}>
@@ -123,9 +194,9 @@ class receiptDetailsScreen extends React.Component {
             <View style={styles.compBackground}>
                 <FlatList
                 horizontal={true}
-                data={this.state.receiptJson}
+                data={receiptJson}
                 renderItem={renderItem}
-                keyExtractor={item => item.id}
+                keyExtractor={(item, index) => index.toString()}
             />
                 
           </View>
@@ -133,22 +204,22 @@ class receiptDetailsScreen extends React.Component {
                 <Text style={styles.detailsTitles}>Title this purchase: </Text>
                         <TextInput
                         style={styles.detailPgInput}
-                        onChangeText={this.changeTxt4Title}
-                        value={this.state.titleTxt}
+                        onChangeText={changeTxt4Title}
+                        value={titleTxt}
                         placeholder="Enter a title here..."
                         >
                         </TextInput>
                 <Text style={styles.detailsTitles}>Add a more detailed description about purchase: </Text>
                         <TextInput
                         style={styles.detailPgInputLarge}
-                        onChangeText={this.changeTxt4DetailedNote}
-                        value={this.state.detailedNote}
+                        onChangeText={changeTxt4DetailedNote}
+                        value={detailedNote}
                         placeholder="Describe your purchase more here..."
                         multiline={true}
                         >
                         </TextInput>
                 <View style={styles.butContainer}>
-                    <TouchableOpacity style={styles.butStyle} onPress={this.finishFun}>
+                    <TouchableOpacity style={styles.butStyle} onPress={finishFun}>
                         <Text style={styles.butTxt}>Finish</Text>
                     </TouchableOpacity>
                 </View>
@@ -156,7 +227,7 @@ class receiptDetailsScreen extends React.Component {
           </View>  
         </View>
       );
-    }
+    
   
   }
   

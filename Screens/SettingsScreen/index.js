@@ -157,6 +157,25 @@ export default class SettingsScreen extends React.Component {
                 color={"gray"}
               />
             </TouchableOpacity>
+            <Text style={styles.HeaderTxt}>About</Text>
+            <View style={styles.line}></View>
+            <TouchableOpacity
+              style={styles.listTxtContainer}
+              onPress={() =>
+                this.props.navigation.navigate("About")
+              }
+            >
+              <Text style={styles.listTxt}>About Us</Text>
+              <Ionicons
+                name={
+                  Platform.OS === "ios"
+                    ? "ios-arrow-forward"
+                    : "md-arrow-forward"
+                }
+                size={20}
+                color={"gray"}
+              />
+            </TouchableOpacity>
           </View>
         </Content>
       </Container>

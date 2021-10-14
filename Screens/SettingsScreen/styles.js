@@ -182,5 +182,43 @@ export default {
         backgroundColor: "black",
         marginTop: 3,
         marginBottom: 6
-      }
+      },
+      purpose: {
+        flex: 1,
+        backgroundColor: Colors.tintColorAlt,
+        alignItems: "center",
+        justifyContent: "space-around",
+        flexDirection: "column",
+        padding: 20
+    },
+    purposeTxt: {
+        textAlign: "center",
+        color: "white",
+        fontSize: 18
+    },
+    purposeTxtPurple: {
+      textAlign: "center",
+        color: "purple",
+        fontSize: 18
+    },
+    searchBarContainer: {
+      width:deviceWidth, 
+      height: deviceHeight * 0.07,
+      backgroundColor: Colors.tintColor,
+      justifyContent: "center",
+      alignItems: "center"
+  },
+  searchBar: {
+      width:"95%", 
+      height: "100%",
+      paddingLeft:20,
+      borderRadius: 3, 
+      maxHeight:40,
+      backgroundColor: "#FFFFFF"
+  }, stateBut: {
+    backgroundColor: Colors.tintColor,
+    padding: 14,
+    borderRadius: "20%"
+
+  }
 };

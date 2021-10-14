@@ -10,6 +10,8 @@ import SearchScreen from "./Screens/ItemsScreen/index";
 import SettingsScreen from "./Screens/SettingsScreen/index";
 import PictureScreen from "./Screens/HomeScreen/pictureProcessing"; /*Actually create a sub page for the home page and include its link here!!!*/
 import ReceiptDetailsScreen from "./Screens/HomeScreen/receiptDetails"
+import ItemDetailsScreen from "./Screens/ItemsScreen/detailsScreen"
+import AboutScreen from "./Screens/SettingsScreen/about"
 import Colors from "./Constants/Colors"
 import { createStackNavigator } from '@react-navigation/stack';
 
@@ -133,6 +135,21 @@ function SearchScreenSubPageNavigation() {
             fontSize: 23
           },
         }} />
+        <Stack.Screen name="ItemDetails" component={ItemDetailsScreen}
+        options={{
+          title: 'Purchase Details',
+          headerStyle: {
+            backgroundColor: Colors.tintColor,
+            elevation: 0,
+            shadowOpacity: 0,
+            borderBottomWidth: 0,
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontSize: 23
+          },
+        }}
+        /> 
       </Stack.Navigator>
   )
 }
@@ -156,6 +173,21 @@ function SettingsScreenSubPageNavigation() {
             fontSize: 23
           },
         }} />
+        <Stack.Screen name="About" component={AboutScreen}
+        options={{
+          title: 'About',
+          headerStyle: {
+            backgroundColor: Colors.tintColor,
+            elevation: 0,
+            shadowOpacity: 0,
+            borderBottomWidth: 0,
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontSize: 23
+          },
+        }}
+        /> 
       </Stack.Navigator>
   )
 }
