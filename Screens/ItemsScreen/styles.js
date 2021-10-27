@@ -86,6 +86,36 @@ export default {
         width: "100%",
         height: "100%",
         borderRadius: (deviceWidth * 0.1) / 2,
+    }, detailImage: {
+        width: "60%",
+        height: "60%",
+        borderRadius: (deviceWidth * 0.1) / 2,
+    }, detailsContainer: {
+        flex: 1,
+        alignItems: "center"
+    }, detailsSubContainer: {
+        flex: 1,
+        alignItems: "flex-start",
+        width: "100%",
+        padding: 10
+    }, titleTxt4Details: {
+        fontSize: 22,
+        paddingVertical: 10,
+    }, titleTxt4DetailsUnderlined: {
+        fontSize: 22,
+        paddingVertical: 10,
+        textDecorationLine: 'underline',
+    }, titleTxt4Detailsparagraph: {
+        fontSize: 14
+    }, noDataTxtBox: {
+        width: "100%",
+        display: "flex",
+        justifyContent: "center",
+        padding: 10,
+        flexDirection: "row"
+    }, noDataTxt: {
+        fontSize: 18,
+        color: "gray"
     }
 
 };

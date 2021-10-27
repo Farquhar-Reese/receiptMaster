@@ -114,21 +114,26 @@ const refresh = () => {
             style={styles.searchBar}
           />
         </View>
-          <FlatList
-            data={dataJson}
-            renderItem={({ item, index }) => (
-              <TouchableOpacity onPress= { () => {navigation.navigate('ItemDetails', {item: item})}} >
-                <ListComp 
-                index={index}
-                itemImage={{uri: item.image}}
-                itemTitle={item.title}
-                itemPurchaseDate={item.datePurchased}
-                />
-              </TouchableOpacity>
-            )}
-            keyExtractor={(item, index) => index.toString()}
-            extraData={dataJson}
+        {dataJson.length == 0 ? 
+        (<View style={styles.noDataTxtBox}>
+            <Text style={styles.noDataTxt}>You have no saved purchases currently</Text>
+          </View>)
+      : (<FlatList
+      data={dataJson}
+      renderItem={({ item, index }) => (
+        <TouchableOpacity onPress= { () => {navigation.navigate('ItemDetails', {item: item})}} >
+          <ListComp 
+          index={index}
+          itemImage={{uri: item.image}}
+          itemTitle={item.title}
+          itemPurchaseDate={item.datePurchased}
           />
+        </TouchableOpacity>
+      )}
+      keyExtractor={(item, index) => index.toString()}
+      extraData={dataJson}
+    />)}
+          
       </Container>
     );
   }

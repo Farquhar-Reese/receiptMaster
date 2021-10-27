@@ -54,7 +54,8 @@ export default class SettingsScreen extends React.Component {
       <Container style={{ backgroundColor: "#FFF" }}>
         <Content>
           <View>
-            <Text style={styles.HeaderTxt}>General</Text>
+            {/**
+             * <Text style={styles.HeaderTxt}>General</Text>
             <View style={styles.line}></View>
             <TouchableOpacity
               style={styles.listTxtContainer}
@@ -104,6 +105,7 @@ export default class SettingsScreen extends React.Component {
                 color={"gray"}
               />
             </TouchableOpacity>
+             */}
             <Text style={styles.HeaderTxt}>Notifications</Text>
             <View style={styles.line}></View>
             <View style={styles.listTxtContainer}>

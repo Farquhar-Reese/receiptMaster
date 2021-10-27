@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, FlatList, TextInput } from 'react-native';
+import { StyleSheet, Text, View, FlatList, TextInput, Image } from 'react-native';
 import { Container, Content } from "native-base";
 import ListComp from "./listComponet";
 import styles from "./styles";
@@ -19,11 +19,18 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 const detailsScreen = (item) => {
     const route = useRoute()
     return (
-        <View>
-            <Text>Item Details: </Text>
-            <Text>{route.params.item.title}</Text>
-            <Text>{route.params.item.description}</Text>
-            <Text>{route.params.item.datePurchased}</Text>
+        <View style={styles.detailsContainer}>
+            <Text style={styles.titleTxt4Details}>{route.params.item.title}</Text>
+            <Image 
+                            style={styles.detailImage}
+                            source={{ uri: route.params.item.image }}
+                        />
+            <View style={styles.detailsSubContainer}>
+                <Text style={styles.titleTxt4DetailsUnderlined}>Purchased:</Text>
+                <Text style={styles.titleTxt4Detailsparagraph}>{route.params.item.datePurchased}</Text>
+                <Text style={styles.titleTxt4DetailsUnderlined}>Notes:</Text>
+                <Text style={styles.titleTxt4Detailsparagraph}>{route.params.item.description}</Text>
+            </View>
         </View>
         
     );

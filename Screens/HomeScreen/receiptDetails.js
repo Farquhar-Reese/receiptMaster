@@ -13,6 +13,7 @@ import { Colors } from 'react-native/Libraries/NewAppScreen';
 import * as ImagePicker from 'expo-image-picker';
 import itemsScreen from '../ItemsScreen/index'
 
+import { StackActions } from '@react-navigation/native';
 import { useNavigation } from '@react-navigation/native';
 import { useRoute } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -114,11 +115,11 @@ const storeListItem = async (value) => {
         console.log(data)
         console.log("finished printing the data")
         const newData = JSON.stringify(data)
-        await AsyncStorage.setItem('@Receipts', newData).then(navigation.navigate('Search'))
+        await AsyncStorage.setItem('@Receipts', newData).then(navigation.dispatch(StackActions.popToTop())).then(navigation.navigate('Search'))
       } else {
         let newReceiptList = []
         newReceiptList.push(value)
-        await AsyncStorage.setItem('@Receipts', JSON.stringify(newReceiptList)).then(navigation.navigate('Search'))
+        await AsyncStorage.setItem('@Receipts', JSON.stringify(newReceiptList)).then(navigation.dispatch(StackActions.popToTop())).then(navigation.navigate('Search'))
       }
       
     }
