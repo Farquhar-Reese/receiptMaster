@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Image, FlatList, TextInput } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Image, FlatList, TextInput, Alert  } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { Container, Content } from "native-base";
 /*import HeaderComp from "../../Components/HeaderComp"; this is my custom built header component
@@ -186,6 +186,25 @@ const storeListItem = async (value) => {
                 </View>
           );
 
+
+          const newPictureBut = () =>
+    Alert.alert(
+      "Add Photo",
+      "choose one of the follow options...",
+      [
+        {
+          text: "Use Camera",
+          onPress: () => console.log("Ask me later pressed")
+        },
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel"
+        },
+        { text: "Use Photo Library", onPress: () => console.log("OK Pressed") }
+      ]
+    );
+
           
       
     
@@ -199,7 +218,7 @@ const storeListItem = async (value) => {
                 renderItem={renderItem}
                 keyExtractor={(item, index) => index.toString()}
                 ListFooterComponent={() => (
-                <TouchableOpacity style={styles.addButStyle}>
+                <TouchableOpacity style={styles.addButStyle}  onPress={newPictureBut}>
                   <Ionicons
                     name={
                       "add-circle-outline"

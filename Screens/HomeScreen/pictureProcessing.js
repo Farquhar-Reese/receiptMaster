@@ -17,6 +17,10 @@ class PictureDetailsScreen extends React.Component {
     //const { camPic } = route.params;
   }
 
+  removeBut = () =>{
+    this.props.navigation.pop();
+  }
+
   addBut = () =>{
     console.log("made it to the addBut")
     this.props.navigation.navigate("ReceiptDetails", {
@@ -77,7 +81,7 @@ class PictureDetailsScreen extends React.Component {
 
         <View  style={{display: "flex", flexDirection: "row", justifyContent: 'flex-start'}}>
            <TouchableOpacity
-        onPress={this.addBut}
+        onPress={this.removeBut}
       >
          <MaterialIcons
             name={Platform.OS === "ios" ? "highlight-remove" : "highlight-remove"}
