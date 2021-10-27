@@ -54,9 +54,8 @@ export default {
     },
     leftContainer: {
         width: deviceWidth * 0.33,
-        height: "90%",
+        height: "100%",
         justifyContent: "center",
-        
         alignItems: "center",
     }, 
     leftContainerInner: {
@@ -122,5 +121,11 @@ export default {
     butTxt: {
         color: "white",
         fontSize: 20
+    }, addButStyle: {
+        flex: 1,
+        alignItems: "center",
+        justifyContent: "center",
+        flexDirection: "row",
+        
     }
 }

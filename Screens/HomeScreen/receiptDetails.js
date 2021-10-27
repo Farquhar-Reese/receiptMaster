@@ -8,8 +8,7 @@ This is how you call it:
 */
 import CamComp from "./cameraComponent"
 import styles from './styles';
-import Icon from "react-native-vector-icons/FontAwesome";
-import { Colors } from 'react-native/Libraries/NewAppScreen';
+import { Ionicons } from "@expo/vector-icons";
 import * as ImagePicker from 'expo-image-picker';
 import itemsScreen from '../ItemsScreen/index'
 
@@ -17,6 +16,7 @@ import { StackActions } from '@react-navigation/native';
 import { useNavigation } from '@react-navigation/native';
 import { useRoute } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Colors from "../../Constants/Colors";
 
 const receiptDetailsScreen = (pic) => {
     const navigation = useNavigation();
@@ -190,7 +190,7 @@ const storeListItem = async (value) => {
       
     
       return (
-        <View style={{ margin: 0, flex: 1, width: 'auto', height: '100%', display: 'flex', alignItems: 'center', backgroundColor: Colors.tintColor }}>
+        <View style={{ margin: 0, flex: 1, width: 'auto', height: '100%', display: 'flex', alignItems: 'center' }}>
             
             <View style={styles.compBackground}>
                 <FlatList
@@ -198,6 +198,17 @@ const storeListItem = async (value) => {
                 data={receiptJson}
                 renderItem={renderItem}
                 keyExtractor={(item, index) => index.toString()}
+                ListFooterComponent={() => (
+                <TouchableOpacity style={styles.addButStyle}>
+                  <Ionicons
+                    name={
+                      "add-circle-outline"
+                    }
+                    size={50}
+                    color={Colors.tintColorAlt}
+                  />                  
+                </TouchableOpacity>
+                )}
             />
                 
           </View>
