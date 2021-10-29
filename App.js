@@ -24,7 +24,6 @@ function MyTabs() {
       <Tab.Screen
         name="Home"
         component={HomeScreenSubPageNavigation}
-        tabBarShowLabel={false}
         options={{
           tabBarLabel: ({ focused, color, size }) => (
             <Text style={{color:focused?Colors.tintColor:"#A9A9A9", fontSize: 11}}> Home </Text>
