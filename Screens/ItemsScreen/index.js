@@ -45,7 +45,7 @@ const ItemScreen = () => {
   const ListItems = [];
 
   const [dataJson, changeDataJson] = useState(ListItems);
-  const [searchText, changeSearchText] = useState("");
+  const [searchText, changeSearchText] = useState();
   const [refreshState, changerefreshState] = useState(69);
 
   const add2ListItems = (newListItem) => {
@@ -103,17 +103,30 @@ const refresh = () => {
   console.log("we made it to the refresh function")
   console.log(refreshState)
 }
+
+const filterList = () => {
+  return dataJson.filter(listItem => listItem.toLowerCase().includes(searchText.toLowerCase()));
+}
   
     return (
-      <Container style={{ backgroundColor: "#FFF" }}>
+      <Container>
         <View style={styles.searchBarContainer}>
           <TextInput 
             value={searchText}
-            onChange={setSearchText}
+            onChange={changeSearchText}
             placeholder= {"Search for previous purchase..."}
             style={styles.searchBar}
           />
         </View>
+        {
+        /**inside the includes should filter the searchText and check for the lowercase version... i.e.: searchText.toLowerCase() 
+         * 
+         * Have this filter display first then integrate it into the flatList. The flatList may be a problem because it's a pure component (i.e. would need
+         * to change the actual state variable in order to result in a visible change).
+        */
+        searchText != null ? dataJson.filter(listItem => listItem.title.toLowerCase().includes(searchText)).map((listItem, index) => (
+          <Text>{searchText}</Text>
+        ))   : null}
         {dataJson.length == 0 ? 
         (<View style={styles.noDataTxtBox}>
             <Text style={styles.noDataTxt}>You have no saved purchases currently</Text>

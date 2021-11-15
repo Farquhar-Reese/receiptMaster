@@ -6,6 +6,7 @@ import { Ionicons } from "@expo/vector-icons";
 import * as WebBrowser from "expo-web-browser";
 import styles from "./styles";
 import Colors from "../../Constants/Colors"
+import { themes } from '../../Constants/darkModeTheme';
 
 export default class SettingsScreen extends React.Component {
   static navigationOptions = {
@@ -50,8 +51,9 @@ export default class SettingsScreen extends React.Component {
 
   render() {
     const navigation = this.props.navigation;
+    
     return (
-      <Container style={{ backgroundColor: "#FFF" }}>
+      <Container style = {styles.container}>
         <Content>
           <View>
             {/**

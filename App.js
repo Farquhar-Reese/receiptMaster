@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import * as Updates from "expo-updates";
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Appearance } from 'react-native';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";/*may have to get this from react-navigation as well*/
 import { NavigationContainer } from "@react-navigation/native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
@@ -14,6 +14,7 @@ import ItemDetailsScreen from "./Screens/ItemsScreen/detailsScreen"
 import AboutScreen from "./Screens/SettingsScreen/about"
 import Colors from "./Constants/Colors"
 import { createStackNavigator } from '@react-navigation/stack';
+import {ThemeContext, themes} from './Constants/darkModeTheme';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -184,9 +185,11 @@ function SettingsScreenSubPageNavigation() {
 
 export default function App() {
   return (
-    <NavigationContainer>
-        <MyTabs />
-      </NavigationContainer>
+    <ThemeContext.Provider value = {Appearance.getColorScheme()}>
+      <NavigationContainer>
+          <MyTabs />
+        </NavigationContainer>
+    </ThemeContext.Provider>
   );
 }
 
