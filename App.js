@@ -5,8 +5,9 @@ import { StyleSheet, Text, View } from 'react-native';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";/*may have to get this from react-navigation as well*/
 import { NavigationContainer } from "@react-navigation/native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import IonIcons from "react-native-vector-icons/Ionicons";
 import HomeScreen from "./Screens/HomeScreen/index";
-import SearchScreen from "./Screens/ItemsScreen/index";
+import PurchasesScreen from "./Screens/ItemsScreen/index";
 import SettingsScreen from "./Screens/SettingsScreen/index";
 import PictureScreen from "./Screens/HomeScreen/pictureProcessing"; /*Actually create a sub page for the home page and include its link here!!!*/
 import ReceiptDetailsScreen from "./Screens/HomeScreen/receiptDetails"
@@ -26,7 +27,7 @@ function MyTabs() {
         component={HomeScreenSubPageNavigation}
         options={{
           tabBarLabel: ({ focused, color, size }) => (
-            <Text style={{color:focused?Colors.tintColor:"#A9A9A9", fontSize: 11}}> Home </Text>
+            <Text style={{color:focused?Colors.tintColor:"#A9A9A9", fontSize: 11}}> Add </Text>
           ),
           tabBarIcon: ({ focused, color, size }) => (
             <MaterialCommunityIcons name="camera" color={focused ? Colors.tintColor : "#A9A9A9"} size={size} />
@@ -35,13 +36,13 @@ function MyTabs() {
       />
       <Tab.Screen
         name="Search"
-        component={SearchScreenSubPageNavigation}
+        component={PurchasesScreenSubPageNavigation}
         options={{
           tabBarLabel: ({ focused, color, size }) => (
-            <Text style={{color:focused?Colors.tintColor:"#A9A9A9", fontSize: 11}}> Search </Text>
+            <Text style={{color:focused?Colors.tintColor:"#A9A9A9", fontSize: 11}}> Purchases </Text>
           ),
           tabBarIcon: ({focused, color, size }) => (
-            <MaterialCommunityIcons name="magnify" color={focused ? Colors.tintColor : "#A9A9A9"} size={size} />
+            <IonIcons name="receipt-outline" color={focused ? Colors.tintColor : "#A9A9A9"} size={size} />
           ),
         }}
       />
@@ -116,12 +117,12 @@ function HomeScreenSubPageNavigation() {
   )
 }
 
-function SearchScreenSubPageNavigation() {
+function PurchasesScreenSubPageNavigation() {
   return (
       <Stack.Navigator>
         
         <Stack.Screen name="Index" 
-        component={SearchScreen} 
+        component={PurchasesScreen} 
         options={{
           title: 'Purchases',
           headerStyle: {
