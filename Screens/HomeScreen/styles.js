@@ -127,5 +127,9 @@ export default {
         justifyContent: "center",
         flexDirection: "row",
         
+    }, removeButStyle: {
+        position: 'absolute',
+        right:     5,
+        top:      5,
     }
 }

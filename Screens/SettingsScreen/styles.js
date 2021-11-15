@@ -1,4 +1,5 @@
 import Colors from "../../Constants/Colors";
+import { ThemeContext, themes } from "../../Constants/darkModeTheme";
 
 const React = require("react-native");
 const { Dimensions, Platform } = React;
@@ -7,10 +8,10 @@ const deviceWidth = Dimensions.get("window").width;
 const deviceHeight = Dimensions.get("window").height;
 
 export default { 
+  
     container: {
         flex: 1,
-        backgroundColor: "#fff"
-      },
+        backgroundColor: "white"      },
       userStatuscontainer: {
         flex: 1,
         alignItems: "center",
@@ -214,7 +215,7 @@ export default {
       paddingLeft:20,
       borderRadius: 3, 
       maxHeight:40,
-      backgroundColor: "#FFFFFF"
+      backgroundColor: "white"
   }, stateBut: {
     backgroundColor: Colors.tintColor,
     padding: 14,

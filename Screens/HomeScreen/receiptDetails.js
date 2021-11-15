@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Image, FlatList, TextInput } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Image, FlatList, TextInput, Alert  } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { Container, Content } from "native-base";
 /*import HeaderComp from "../../Components/HeaderComp"; this is my custom built header component
@@ -25,6 +25,10 @@ const receiptDetailsScreen = (pic) => {
       id: route.params.pic.uri,
       imageData: route.params.pic,
       imageURI:  route.params.pic.uri}]);
+    const [previousPicture, changePreviousPicture] = useState({
+      id: route.params.pic.uri,
+      imageData: route.params.pic,
+      imageURI:  route.params.pic.uri});
     const [titleTxt, changeTitleTxt] = useState("");
     const [detailedNote, changeDetailedNote] = useState("");
 
@@ -32,22 +36,34 @@ const receiptDetailsScreen = (pic) => {
     useEffect(() => {getData()}
            ,[])
 
+
+           
+
     const getData = async () => {
-      console.log("my  recepitJson = ")
+     /* console.log("my  recepitJson = ")
       console.log(receiptJson)
       console.log("we made it inside of getData")
       console.log("routeParams = ")
       console.log(route.params)
       console.log("normal Params = ")
       console.log(pic)
+      */
         try {
+          console.log("made it into the tryCatch")
           const jsonValue = await AsyncStorage.getItem('@TempReceipts')
+          console.log(jsonValue)
           let data = null
           if (jsonValue!=null) {
             console.log("we made it through useEffect and the dataInAsync is not empty for @TempReceipts")
             data = JSON.parse(jsonValue)
-            changeReceiptJson(receiptJson.push(data))
-          } 
+            data.push(previousPicture)
+            const newData = JSON.stringify(data)
+            await AsyncStorage.setItem('@TempReceipts', newData).then(changeReceiptJson(data))
+          } else {
+            console.log("did not Make it into the JsonTempReceipts if statement...")
+            const newData = JSON.stringify(receiptJson)
+            await AsyncStorage.setItem('@TempReceipts', newData)
+          }
         } catch(e) {
           console.dir(e)
         }
@@ -64,9 +80,12 @@ const receiptDetailsScreen = (pic) => {
     }
 
     */
+
+    
   
-    const addBut = () =>{
-      console.log("made it to the addBut")
+    const removePicBut = () =>{
+      console.log("made it to the removeBut. Item is: ")
+      console.log(index)
     }
 
     const changeTxt4Title = (changedTxt) => {
@@ -115,11 +134,11 @@ const storeListItem = async (value) => {
         console.log(data)
         console.log("finished printing the data")
         const newData = JSON.stringify(data)
-        await AsyncStorage.setItem('@Receipts', newData).then(navigation.dispatch(StackActions.popToTop())).then(navigation.navigate('Search'))
+        await AsyncStorage.setItem('@Receipts', newData).then(await AsyncStorage.removeItem('@TempReceipts')).then(navigation.dispatch(StackActions.popToTop())).then(navigation.navigate('Search'))
       } else {
         let newReceiptList = []
         newReceiptList.push(value)
-        await AsyncStorage.setItem('@Receipts', JSON.stringify(newReceiptList)).then(navigation.dispatch(StackActions.popToTop())).then(navigation.navigate('Search'))
+        await AsyncStorage.setItem('@Receipts', JSON.stringify(newReceiptList)).then(await AsyncStorage.removeItem('@TempReceipts')).then(navigation.dispatch(StackActions.popToTop())).then(navigation.navigate('Search'))
       }
       
     }
@@ -133,7 +152,8 @@ const storeListItem = async (value) => {
         id: route.params.pic.uri,
         title: titleTxt,
         description: detailedNote,
-        image: route.params.pic.uri,
+        image: receiptJson[0].imageURI,
+        imageList: receiptJson,
         datePurchased: "7/15/2023"
       }
       /**
@@ -173,7 +193,7 @@ const storeListItem = async (value) => {
               },
           ];
 
-          const renderItem = ({ item }) => (
+          const renderItem = ({ item, index }) => (
 
               
               <View style={styles.leftContainer}>
@@ -183,8 +203,46 @@ const storeListItem = async (value) => {
                             source={{ uri: item.imageURI }}
                         />
                     </View>
+                    <TouchableOpacity style={styles.removeButStyle}  onPress={() => {
+                      let data = receiptJson.slice(0,index);
+                      data = data.concat(receiptJson.slice(index+1));
+                      if (data.length < 1) {
+                        Alert.alert("At least one picture is required")
+                      } else {
+                        changeReceiptJson(data);
+                      }
+                      
+
+                    }}>
+                          <Ionicons
+                            name={
+                              "close-circle-outline"
+                            }
+                            size={50}
+                            color={"red"}
+                          />                  
+                        </TouchableOpacity>
                 </View>
           );
+
+
+          const newPictureBut = () =>
+    Alert.alert(
+      "Add Photo",
+      "Choose one of the follow options...",
+      [
+        {
+          text: "Use Camera",
+          onPress: () => navigation.dispatch(StackActions.popToTop())
+        },
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel"
+        },
+        { text: "Use Photo Library", onPress: () => console.log("OK Pressed") }
+      ]
+    );
 
           
       
@@ -199,7 +257,7 @@ const storeListItem = async (value) => {
                 renderItem={renderItem}
                 keyExtractor={(item, index) => index.toString()}
                 ListFooterComponent={() => (
-                <TouchableOpacity style={styles.addButStyle}>
+                <TouchableOpacity style={styles.addButStyle}  onPress={newPictureBut}>
                   <Ionicons
                     name={
                       "add-circle-outline"
